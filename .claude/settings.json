@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Skill(dataviz)",
+      "Skill(dataviz:*)",
+      "Bash(node scripts/validate_palette.js \"#ff3b3b,#3987e5,#199e70,#c98500\" --mode dark --surface \"#1a1a19\")",
+      "Bash(grep -iA3 -E \"use client|breaking|deprecat|directive\")",
+      "Bash(npm run *)",
+      "Bash(echo \"started pid $!\")"
+    ]
+  }
+}
