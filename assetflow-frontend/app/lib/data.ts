@@ -1,5 +1,7 @@
 // Demo data for the AssetFlow — Fleet Matrix dashboard.
-// Static mock values until the assets/fleet backend endpoints exist.
+// Used as a graceful fallback when the backend is unreachable; live data is
+// fetched from the Spring Boot API in `api.ts`. Uptime has no backend endpoint
+// yet, so that series stays static.
 
 export type Trend = "up" | "down";
 
@@ -7,8 +9,9 @@ export interface Kpi {
   label: string;
   value: string;
   sub: string;
-  delta: string;
-  trend: Trend;
+  // The backend summary omits delta/trend, so the pill is optional.
+  delta?: string;
+  trend?: Trend;
 }
 
 export const kpis: Kpi[] = [
@@ -56,19 +59,20 @@ export const categories: CategoryDatum[] = [
 export type FleetStatus = "operational" | "maintenance" | "offline";
 
 export interface FleetUnit {
-  id: string;
+  code: string; // business code shown in the UI, e.g. "FM-2201"
   name: string;
   depot: string;
+  category?: string;
   status: FleetStatus;
   utilization: number; // percent
   updated: string;
 }
 
 export const fleet: FleetUnit[] = [
-  { id: "FM-2201", name: "Brofist Hauler", depot: "Tokyo-1", status: "operational", utilization: 92, updated: "2m ago" },
-  { id: "FM-1180", name: "Nine-Year Loader", depot: "Brighton", status: "operational", utilization: 88, updated: "6m ago" },
-  { id: "FM-3390", name: "Chair Drone MK4", depot: "Tokyo-2", status: "maintenance", utilization: 41, updated: "14m ago" },
-  { id: "FM-0455", name: "Floor Gang Charger", depot: "Osaka", status: "operational", utilization: 76, updated: "21m ago" },
-  { id: "FM-7712", name: "Meme Sensor Array", depot: "Brighton", status: "offline", utilization: 0, updated: "1h ago" },
-  { id: "FM-6089", name: "Bro Loader XL", depot: "Tokyo-1", status: "operational", utilization: 95, updated: "3m ago" },
+  { code: "FM-2201", name: "Brofist Hauler", depot: "Tokyo-1", category: "Haulers", status: "operational", utilization: 92, updated: "2m ago" },
+  { code: "FM-1180", name: "Nine-Year Loader", depot: "Brighton", category: "Loaders", status: "operational", utilization: 88, updated: "6m ago" },
+  { code: "FM-3390", name: "Chair Drone MK4", depot: "Tokyo-2", category: "Drones", status: "maintenance", utilization: 41, updated: "14m ago" },
+  { code: "FM-0455", name: "Floor Gang Charger", depot: "Osaka", category: "Chargers", status: "operational", utilization: 76, updated: "21m ago" },
+  { code: "FM-7712", name: "Meme Sensor Array", depot: "Brighton", category: "Sensors", status: "offline", utilization: 0, updated: "1h ago" },
+  { code: "FM-6089", name: "Bro Loader XL", depot: "Tokyo-1", category: "Loaders", status: "operational", utilization: 95, updated: "3m ago" },
 ];
