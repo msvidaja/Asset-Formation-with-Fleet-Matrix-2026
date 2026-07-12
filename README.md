@@ -129,8 +129,6 @@ Other scripts: `npm run build`, `npm run start`, `npm run lint`.
 3. Start the frontend: `cd assetflow-frontend && npm install && npm run dev`.
 4. Open <http://localhost:3000>.
 
-> Don't have Postgres yet? Start just the frontend — it renders with demo data and a banner
-> until the backend comes online.
 
 ---
 
