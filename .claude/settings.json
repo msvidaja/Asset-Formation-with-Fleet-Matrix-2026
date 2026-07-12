@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(ls -la && echo \"---ROOT ABOVE---\" && ls -la /d/Asset)",
+      "Read(//d/Asset/**)"
+    ]
+  }
+}

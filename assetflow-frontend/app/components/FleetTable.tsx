@@ -23,9 +23,9 @@ export default function FleetTable({ units }: { units: FleetUnit[] }) {
           {units.map((u) => {
             const s = STATUS[u.status];
             return (
-              <tr key={u.id} className="fleet-row border-b border-[var(--hair)]">
+              <tr key={u.code} className="fleet-row border-b border-[var(--hair)]">
                 <td className="px-3 py-3.5 font-semibold">{u.name}</td>
-                <td className="tnum px-3 py-3.5 text-[var(--ink-muted)]">{u.id}</td>
+                <td className="tnum px-3 py-3.5 text-[var(--ink-muted)]">{u.code}</td>
                 <td className="px-3 py-3.5 text-[var(--ink-2)]">{u.depot}</td>
                 <td className="px-3 py-3.5">
                   {/* status = icon + label, never color alone */}

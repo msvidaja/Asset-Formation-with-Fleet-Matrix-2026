@@ -3,14 +3,25 @@ import StatTile from "@/app/components/StatTile";
 import UptimeChart from "@/app/components/UptimeChart";
 import CategoryBars from "@/app/components/CategoryBars";
 import FleetTable from "@/app/components/FleetTable";
-import { kpis, uptime, categories, fleet } from "@/app/lib/data";
+import { uptime } from "@/app/lib/data";
+import { getDashboardData } from "@/app/lib/api";
 
-export default function Home() {
+export default async function Home() {
+  const { kpis, categories, fleet, live } = await getDashboardData();
+
   return (
     <div className="flex flex-1 flex-col">
       <TopBar />
 
       <main className="mx-auto w-full max-w-[1240px] flex-1 px-5 pb-20 pt-8 sm:px-8">
+        {!live && (
+          <div className="mb-6 rounded-lg border border-[var(--hair)] bg-[var(--panel-3)] px-4 py-3 text-sm text-[var(--ink-2)]">
+            <span aria-hidden>⚠️</span>{" "}
+            Backend unavailable — showing demo data. Start the API (and Postgres)
+            to see live fleet data.
+          </div>
+        )}
+
         {/* Hero */}
         <section className="mb-8 flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
           <div className="flex flex-col gap-3">
